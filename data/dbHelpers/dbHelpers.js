@@ -61,6 +61,16 @@ function addAction(action) {
 	return db('actions').insert(action);
 }
 
+//function for udate a action
+function updateAction(id, body) {
+	return db('actions').where({ id }).update(body);
+}
+
+//function for deleting a action
+function deleteAction(id) {
+	return db('actions').where({ id }).del();
+}
+
 module.exports = {
 	getProjects,
 	addProject,

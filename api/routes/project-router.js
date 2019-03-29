@@ -36,12 +36,15 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	const body = req.body;
 	const { id } = req.params;
-
-	try {
-		const result = await dbHelper.updateProject(id, body);
-		res.status(200).json(result);
-	} catch (error) {
-		res.status(500).json({ error: 'error trying to modify data' });
+	if (body.project_name && body.project_description) {
+		try {
+			const result = await dbHelper.updateProject(id, body);
+			res.status(200).json(result);
+		} catch (error) {
+			res.status(500).json({ error: 'error trying to modify data' });
+		}
+	} else {
+		res.status(400).json({ error: 'please provide name and description for the project' });
 	}
 });
 

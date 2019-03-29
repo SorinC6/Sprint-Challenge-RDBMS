@@ -13,12 +13,16 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const body = req.body;
-	try {
-		const result = await dbHelper.addAction(body);
-		res.status(201).json(result);
-	} catch (error) {
-		res.status(500).json({ error: 'error trying to save a action in database' });
+	const body = req.body;
+	if (body.action_description && body.action.notes) {
+		try {
+			const result = await dbHelper.addAction(body);
+			res.status(201).json(result);
+		} catch (error) {
+			res.status(500).json({ error: 'error trying to save a action in database' });
+		}
+	} else {
+		res.status(400).json({ error: 'please provide description and notes to a action' });
 	}
 });
 

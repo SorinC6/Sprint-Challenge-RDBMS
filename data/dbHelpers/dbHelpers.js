@@ -78,5 +78,7 @@ module.exports = {
 	addAction,
 	getProjectByIdWithActions,
 	updateProject,
-	deleteProject
+	deleteProject,
+	updateAction,
+	deleteAction
 };

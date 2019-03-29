@@ -33,4 +33,26 @@ router.post('/', async (req, res) => {
 	}
 });
 
+router.put('/:id', async (req, res) => {
+	const body = req.body;
+	const { id } = req.params;
+
+	try {
+		const result = await dbHelper.updateProject(id, body);
+		res.status(200).json(result);
+	} catch (error) {
+		res.status(500).json({ error: 'error trying to modify data' });
+	}
+});
+
+router.delete('/:id', async (req, res) => {
+	const { id } = req.params;
+	try {
+		const result = await dbHelper.deleteProject(id);
+		res.status(200).json({ message: 'succesfully deleted' });
+	} catch (error) {
+		res.status(500).json({ errror: 'error trying to delete' });
+	}
+});
+
 module.exports = router;

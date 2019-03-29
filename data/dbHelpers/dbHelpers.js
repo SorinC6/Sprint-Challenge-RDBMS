@@ -15,20 +15,20 @@ function getProjects() {
 // 	from('projects')
 // }
 
-function getProjectByIdWithActions(id) {
-	return db
-		.select('id', 'project_name', 'project_description', 'isCompleted')
-		.from('projects')
-		.where('id', id)
-		.first()
-		.then((project) => {
-			return db
-				.select('id', 'action_name', 'action_note', 'action_completed ')
-				.from('actions')
-				.where('project_id', id);
-			//return project;
-		});
-}
+// function getProjectByIdWithActions(id) {
+// 	return db
+// 		.select('id', 'project_name', 'project_description', 'isCompleted')
+// 		.from('projects')
+// 		.where('id', id)
+// 		.first()
+// 		.then((project) => {
+// 			return db
+// 				.select('id', 'action_name', 'action_note', 'action_completed ')
+// 				.from('actions')
+// 				.where('project_id', id);
+// 			//return project; ?
+// 		});
+// }
 
 function getProjectByIdWithActions(id) {
 	return db('actions').join('projects', 'projects.id', '=', 'actions.project_id').where({ 'projects.id': id });
@@ -37,6 +37,16 @@ function getProjectByIdWithActions(id) {
 //adding a project to database
 function addProject(project) {
 	return db('projects').insert(project);
+}
+
+//update a project
+function updateProject(id, body) {
+	return db('projects').where({ id }).update(body);
+}
+
+//delete a project
+function deleteProject(id) {
+	return db('projects').where({ id }).del();
 }
 
 //getting all action from database
@@ -53,5 +63,7 @@ module.exports = {
 	addProject,
 	getActions,
 	addAction,
-	getProjectByIdWithActions
+	getProjectByIdWithActions,
+	updateProject,
+	deleteProject
 };

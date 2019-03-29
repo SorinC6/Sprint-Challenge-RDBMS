@@ -15,24 +15,27 @@ function getProjects() {
 // 	from('projects')
 // }
 
-// function getProjectByIdWithActions(id) {
-// 	return db
-// 		.select('id', 'project_name', 'project_description', 'isCompleted')
-// 		.from('projects')
-// 		.where('id', id)
-// 		.first()
-// 		.then((project) => {
-// 			return db
-// 				.select('id', 'action_name', 'action_note', 'action_completed ')
-// 				.from('actions')
-// 				.where('project_id', id);
-// 			//return project; ?
-// 		});
-// }
-
 function getProjectByIdWithActions(id) {
-	return db('actions').join('projects', 'projects.id', '=', 'actions.project_id').where({ 'projects.id': id });
+	return db
+		.select('id', 'project_name', 'project_description', 'isCompleted')
+		.from('projects')
+		.where('id', id)
+		.first()
+		.then((project) => {
+			return db
+				.select('id', 'action_description', 'action_notes', 'isCompleted')
+				.from('actions')
+				.where('project_id', id)
+				.then((action) => {
+					return action;
+				});
+			//return project;
+		});
 }
+
+// function getProjectByIdWithActions(id) {
+// 	return db('actions').join('projects', 'projects.id', '=', 'actions.project_id').where({ 'projects.id': id });
+// }
 
 //adding a project to database
 function addProject(project) {

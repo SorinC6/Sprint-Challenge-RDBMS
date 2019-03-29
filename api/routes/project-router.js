@@ -12,6 +12,17 @@ router.get('/', async (req, res) => {
 	}
 });
 
+router.get('/:id', async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const result = await dbHelper.getProjectByIdWithActions(id);
+		res.status(200).json(result);
+	} catch (error) {
+		res.status(500).json({ error: 'error trying to get a specific action from database' });
+	}
+});
+
 router.post('/', async (req, res) => {
 	const body = req.body;
 	try {

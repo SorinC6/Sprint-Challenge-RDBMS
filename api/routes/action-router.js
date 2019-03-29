@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-	const body = req.body;
+    const body = req.body;
 	try {
 		const result = await dbHelper.addAction(body);
 		res.status(201).json(result);

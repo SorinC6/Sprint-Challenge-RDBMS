@@ -10,7 +10,7 @@ server.use(helmet());
 server.use(express.json());
 
 //server.use(routes)
+server.use('/api/projects', projectRoutes);
 //server.use('/api/actions', actionRoutes);
-//server.use('/api/projects', projectRoutes);
 
 module.exports = server;

@@ -9,7 +9,7 @@ function getProjects() {
 }
 
 function addProject(project) {
-	db('projects').insert(project);
+	return db('projects').insert(project);
 }
 
 module.exports = {

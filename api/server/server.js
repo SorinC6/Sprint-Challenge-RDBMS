@@ -2,8 +2,8 @@ const express = require('express');
 const helmet = require('helmet');
 
 //routes import - nothing for now
+const projectRoutes = require('../routes/project-router');
 //const actionRoutes = require('../routes/action-router');
-//const projectRoutes = require('../routes/project-router');
 
 const server = express();
 server.use(helmet());

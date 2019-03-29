@@ -17,7 +17,11 @@ router.get('/:id', async (req, res) => {
 
 	try {
 		const result = await dbHelper.getProjectByIdWithActions(id);
-		res.status(200).json(result);
+		if (result.length) {
+			res.status(200).json(result);
+		} else {
+			res.status(404).json({ message: "the specified id does't exists" });
+		}
 	} catch (error) {
 		res.status(500).json({ error: 'error trying to get a specific action from database' });
 	}

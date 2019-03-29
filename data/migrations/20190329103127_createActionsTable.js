@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
 		table.text('action_description');
 		table.text('action_notes');
 		table.boolean('isCompleted');
-		table.integer;
+		//table.integer;
 	});
 };
 

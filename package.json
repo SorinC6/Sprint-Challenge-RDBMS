@@ -8,7 +8,16 @@
 	},
 	"scripts": {
 		"server": "nodemon",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"initdb": "knex init",
+		"tableProjects": "knex migrate:make createProjectsTable",
+		"tableActions": "knex migrate:make createActionsTable",
+		"migrate": "knex migrate:latest",
+		"rollback": "knex migrate:rollback",
+		"seedProjects": "knex seed:make 01-projects",
+		"seedActions": "knex seed:make 02-actions",
+		"runseedProjects": "knex seed:run 01-projects",
+		"runseedActions": "knex seed:run 02-actions"
 	},
 	"repository": {
 		"type": "git",
